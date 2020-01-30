@@ -26,9 +26,18 @@ const submitStyle = css`
   background: blue;
 `;
 
+const formBoxStyles = css`
+  width: 500px;
+  margin: 50px auto;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+`;
+
 export const styles = {
   form: formStyles,
-  submitButton: submitStyle
+  submitButton: submitStyle,
+  formBox: formBoxStyles
 };
 
 export const FieldLabel = styled.span`

@@ -5,17 +5,28 @@ import {
   ShowButton,
   styles
 } from "./RegistrationForm.styles";
+import ErrorSummary from "./ErrorSummary";
+import { updateDocumentTitleWithErrors } from "./doc-title-utils";
 
 export default function RegistrationForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showError, setError] = useState(false);
   const togglePassword = useCallback(() => {
     setShowPassword(!showPassword);
   }, [showPassword]);
 
+  function submitCallback(e) {
+    e.preventDefault();
+    updateDocumentTitleWithErrors(3);
+    setError(true);
+  }
+
   return (
-    <>
+    <section css={styles.formBox}>
       <h1>A simple registration form</h1>
-      <form css={styles.form}>
+      <form noValidate onSubmit={submitCallback} css={styles.form}>
+        {showError && <ErrorSummary />}
+
         <label htmlFor="firstName">First name</label>
         <input type="text" name="firstName" id="firstName" />
 
@@ -59,6 +70,6 @@ export default function RegistrationForm() {
 
         <input type="submit" value="Register" css={styles.submitButton} />
       </form>
-    </>
+    </section>
   );
 }
