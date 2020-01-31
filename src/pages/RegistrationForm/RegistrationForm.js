@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import {
+  FieldError,
   FieldHint,
   FieldLabel,
   ShowButton,
@@ -33,16 +34,22 @@ export default function RegistrationForm() {
         <label htmlFor="lastName">Last name</label>
         <input type="text" name="lastName" id="lastName" />
 
-        <label htmlFor="email">Email address</label>
+        <label htmlFor="email">
+          <FieldLabel>Email address </FieldLabel>
+          {showError && (
+            <FieldError>The email address is mandatory!</FieldError>
+          )}
+        </label>
         <p id="email-hint">
-          This is aria based strategy to give hint. But will not give focus on
-          click and its better to directly embed hints in the label
+          Setup an email address on which we can contact you
         </p>
+
         <input
           type="email"
           name="email"
           id="email"
           aria-describedby="email-hint"
+          aria-invalid={showError}
         />
 
         <label htmlFor="password">

@@ -47,6 +47,12 @@ export const FieldHint = styled.span`
   display: block;
   font-weight: normal;
 `;
+export const FieldError = styled.span`
+  display: block;
+  font-weight: normal;
+  color: red;
+`;
+
 export const ShowButton = styled.button`
   background: red;
   color: white;
