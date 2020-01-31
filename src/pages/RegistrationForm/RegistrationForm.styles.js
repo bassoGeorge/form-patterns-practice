@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
 
 const formStyles = css`
   label {
@@ -39,26 +39,3 @@ export const styles = {
   submitButton: submitStyle,
   formBox: formBoxStyles
 };
-
-export const FieldLabel = styled.span`
-  display: block;
-`;
-export const FieldHint = styled.span`
-  display: block;
-  font-weight: normal;
-`;
-export const FieldError = styled.span`
-  display: block;
-  font-weight: normal;
-  color: red;
-`;
-
-export const ShowButton = styled.button`
-  background: red;
-  color: white;
-  padding: 8px;
-
-  &[aria-pressed="true"] {
-    box-shadow: inset 0 0 0 0.15rem #000, inset 0.25em 0.25em 0 #fff;
-  }
-`;

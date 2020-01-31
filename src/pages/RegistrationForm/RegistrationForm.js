@@ -1,79 +1,54 @@
-import React, { useCallback, useState } from "react";
-import {
-  FieldError,
-  FieldHint,
-  FieldLabel,
-  ShowButton,
-  styles
-} from "./RegistrationForm.styles";
+import React, { useState } from "react";
+import { styles } from "./RegistrationForm.styles";
 import ErrorSummary from "./ErrorSummary";
 import { updateDocumentTitleWithErrors } from "./doc-title-utils";
+import InputControl from "../../components/InputControl/InputControl";
 
 export default function RegistrationForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [showError, setError] = useState(false);
-  const togglePassword = useCallback(() => {
-    setShowPassword(!showPassword);
-  }, [showPassword]);
+  const [showErrorSummary, setShowErrorSummary] = useState(false);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   function submitCallback(e) {
     e.preventDefault();
     updateDocumentTitleWithErrors(3);
-    setError(true);
+    setShowErrorSummary(true);
   }
 
   return (
     <section css={styles.formBox}>
       <h1>A simple registration form</h1>
       <form noValidate onSubmit={submitCallback} css={styles.form}>
-        {showError && <ErrorSummary />}
+        {showErrorSummary && <ErrorSummary />}
 
-        <label htmlFor="firstName">First name</label>
-        <input type="text" name="firstName" id="firstName" />
+        <InputControl
+          label="First name"
+          value={firstName}
+          onChange={setFirstName}
+        />
+        <InputControl
+          label="Last name"
+          value={lastName}
+          onChange={setLastName}
+        />
 
-        <label htmlFor="lastName">Last name</label>
-        <input type="text" name="lastName" id="lastName" />
-
-        <label htmlFor="email">
-          <FieldLabel>Email address </FieldLabel>
-          {showError && (
-            <FieldError>The email address is mandatory!</FieldError>
-          )}
-        </label>
-        <p id="email-hint">
-          Setup an email address on which we can contact you
-        </p>
-
-        <input
+        <InputControl
+          label="Email address"
+          value={email}
+          onChange={setEmail}
           type="email"
-          name="email"
-          id="email"
-          aria-describedby="email-hint"
-          aria-invalid={showError}
         />
 
-        <label htmlFor="password">
-          <FieldLabel>Choose a password </FieldLabel>
-          {/* Less ambiguous than Password */}
-          <FieldHint>
-            Must contain 8+ characters with at least 1 number.
-          </FieldHint>
-        </label>
-        <input
-          type={showPassword ? "text" : "password"}
-          name="password"
-          id="password"
+        <InputControl
+          label="Choose a password"
+          value={password}
+          onChange={setPassword}
+          hint={"Must contain 8+ characters with at least 1 number"}
+          type="password"
         />
-        {/* non-sighted users may have a problem if you keep changing the text of the button, alternative would be to
-						use aria-pressed attribute to describe the state of the button
-					*/}
-        <ShowButton
-          onClick={togglePassword}
-          type="button"
-          aria-pressed={showPassword}
-        >
-          Show password
-        </ShowButton>
+        {/* Less ambiguous than Password */}
 
         <input type="submit" value="Register" css={styles.submitButton} />
       </form>
