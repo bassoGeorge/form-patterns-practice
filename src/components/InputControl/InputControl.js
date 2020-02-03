@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { generateIdFromLabel } from "../../utils/input-utils";
 import styles from "./InputControl.styles";
@@ -12,9 +12,16 @@ export default function InputControl({
   onBlur,
   label,
   hint,
-  error
+  error,
+  id
 }) {
-  const id = useRef(generateIdFromLabel(label)).current;
+  //const idBox = useRef();
+  //useEffect(() => {
+  //  idBox.current = generateIdFromLabel(label);
+  //}, []);
+  //
+  //const id = idBox.current;
+  id = id || generateIdFromLabel(label);
 
   return (
     <>

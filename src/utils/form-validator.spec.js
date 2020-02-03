@@ -84,7 +84,7 @@ describe("FormValidator", () => {
 
   it("validates an entire form", () => {
     const validator = new FormValidator();
-    const emptyCheck = v => v && v.length > 0;
+    const emptyCheck = v => v && v.trim().length > 0;
 
     validator
       .addRule("name", emptyCheck, "Name cannot be empty")
@@ -92,7 +92,8 @@ describe("FormValidator", () => {
 
     const cleanResult = validator.validate({
       name: "::name::",
-      email: "::email::"
+      email: "::email::",
+      otherField: "::otherValue::"
     });
 
     expect(cleanResult).toEqual({

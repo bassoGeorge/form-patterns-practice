@@ -11,7 +11,7 @@ export const styles = {
   `
 };
 
-export default function ErrorSummary() {
+export default function ErrorSummary({ errors }) {
   const mainRef = useRef(null);
   useEffect(() => {
     mainRef.current.focus();
@@ -35,11 +35,15 @@ export default function ErrorSummary() {
       <h3 id="error-summary-heading">There seems to be a problem!</h3>
 
       <ul>
-        <li>
-          <a href="#email" onClick={onErrorClick}>
-            Enter an email address
-          </a>
-        </li>
+        {Object.keys(errors).map(elementId => {
+          return (
+            <li key={elementId}>
+              <a href={"#" + elementId} onClick={onErrorClick}>
+                {errors[elementId]}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
