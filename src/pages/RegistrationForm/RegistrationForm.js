@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { styles } from "./RegistrationForm.styles";
 import ErrorSummary from "./ErrorSummary";
 import { updateDocumentTitleWithErrors } from "./doc-title-utils";
@@ -13,10 +13,20 @@ export default function RegistrationForm() {
   const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState({});
 
-  const validatorRef = useRef();
-  useEffect(() => {
-    validatorRef.current = createRegistrationFormValidator();
-  }, []);
+  //const validatorRef = useRef();
+  //useEffect(() => {
+  //  validatorRef.current = createRegistrationFormValidator();
+  //}, []);
+
+  //const [validator] = useState(createRegistrationFormValidator);
+
+  const validator = useMemo(createRegistrationFormValidator, []);
+
+  // This doesn't work...
+  //let validator;
+  //useEffect(() => {
+  //  validator = createRegistrationFormValidator();
+  //}, [])
 
   function submitCallback(e) {
     setShowErrorSummary(false);
@@ -24,7 +34,7 @@ export default function RegistrationForm() {
 
     e.preventDefault();
 
-    const validationResult = validatorRef.current.validate({
+    const validationResult = validator.validate({
       firstName: firstName,
       emailAddress: email,
       lastName: lastName,
