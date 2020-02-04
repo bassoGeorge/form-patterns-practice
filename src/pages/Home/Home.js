@@ -11,7 +11,9 @@ export default function Home() {
           <li>
             <Link to="/ch01">Registration Form</Link>
           </li>
-          <li>Advance form</li>
+          <li>
+            <Link to="/ch02">Checkout Form</Link>
+          </li>
         </ol>
       </main>
     </>
