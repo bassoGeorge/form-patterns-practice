@@ -1,60 +1,30 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { styles } from "./RegistrationForm.styles";
 import ErrorSummary from "./ErrorSummary";
 import { updateDocumentTitleWithErrors } from "./doc-title-utils";
 import InputControl from "../../components/InputControl/InputControl";
-import { createRegistrationFormValidator } from "./registration-form-utils";
+import { REGISTRATION_FORM_CONFIG } from "./registration-form-utils";
+import useForm from "../../hooks/useForm";
 
 export default function RegistrationForm() {
   const [showErrorSummary, setShowErrorSummary] = useState(false);
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [errors, setErrors] = useState({});
+  const [inputValues, onChangeHandlers, onSubmit, errors] = useForm(
+    REGISTRATION_FORM_CONFIG
+  );
 
-  //const validatorRef = useRef();
-  //useEffect(() => {
-  //  validatorRef.current = createRegistrationFormValidator();
-  //}, []);
+  const submitCallback = useCallback(
+    e => {
+      e.preventDefault();
+      setShowErrorSummary(false);
 
-  //const [validator] = useState(createRegistrationFormValidator);
-
-  const validator = useMemo(createRegistrationFormValidator, []);
-
-  // This doesn't work...
-  //let validator;
-  //useEffect(() => {
-  //  validator = createRegistrationFormValidator();
-  //}, [])
-
-  function submitCallback(e) {
-    setShowErrorSummary(false);
-    setErrors({});
-
-    e.preventDefault();
-
-    const validationResult = validator.validate({
-      firstName: firstName,
-      emailAddress: email,
-      lastName: lastName,
-      password: password
-    });
-
-    if (!validationResult.success) {
-      updateDocumentTitleWithErrors(
-        Object.keys(validationResult.errors).length
-      );
-
-      const newErrorObj = {};
-      for (let k in validationResult.errors) {
-        newErrorObj[k] = validationResult.errors[k][0];
+      const result = onSubmit();
+      if (!result.success) {
+        updateDocumentTitleWithErrors(Object.keys(result.errors).length);
+        setShowErrorSummary(true);
       }
-      setErrors(newErrorObj);
-
-      setShowErrorSummary(true);
-    }
-  }
+    },
+    [setShowErrorSummary, onSubmit]
+  );
 
   return (
     <section css={styles.formBox}>
@@ -65,23 +35,23 @@ export default function RegistrationForm() {
         <InputControl
           label="First name"
           id="firstName"
-          value={firstName}
-          onChange={setFirstName}
+          value={inputValues.firstName}
+          onChange={onChangeHandlers.firstName}
           error={errors.firstName}
         />
         <InputControl
           label="Last name"
           id="lastName"
-          value={lastName}
-          onChange={setLastName}
+          value={inputValues.lastName}
+          onChange={onChangeHandlers.lastName}
           error={errors.lastName}
         />
 
         <InputControl
           label="Email address"
           id="emailAddress"
-          value={email}
-          onChange={setEmail}
+          value={inputValues.emailAddress}
+          onChange={onChangeHandlers.emailAddress}
           type="email"
           error={errors.emailAddress}
         />
@@ -89,8 +59,8 @@ export default function RegistrationForm() {
         <InputControl
           label="Choose a password"
           id="password"
-          value={password}
-          onChange={setPassword}
+          value={inputValues.password}
+          onChange={onChangeHandlers.password}
           hint={"Must contain 8+ characters with at least 1 number"}
           type="password"
           error={errors.password}
