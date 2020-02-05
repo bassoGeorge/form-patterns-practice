@@ -6,7 +6,7 @@ const styles = css`
   border: none;
   background: red;
   color: white;
-  padding: 1.5em;
+  padding: 0.8em 1.5em;
   font-size: 18px;
 `;
 
