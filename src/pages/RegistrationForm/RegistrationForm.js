@@ -1,7 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { styles } from "./RegistrationForm.styles";
 import ErrorSummary from "./ErrorSummary";
-import { updateDocumentTitleWithErrors } from "./doc-title-utils";
+import {
+  resetDocumentTitle,
+  updateDocumentTitleWithErrors
+} from "./doc-title-utils";
 import InputControl from "../../components/InputControl/InputControl";
 import { REGISTRATION_FORM_CONFIG } from "./registration-form-utils";
 import useForm from "../../hooks/useForm";
@@ -13,18 +16,27 @@ export default function RegistrationForm() {
   );
 
   const submitCallback = useCallback(
-    e => {
-      e.preventDefault();
+    event => {
+      event.preventDefault();
+      // while loading
       setShowErrorSummary(false);
 
       const result = onSubmit();
-      if (!result.success) {
-        updateDocumentTitleWithErrors(Object.keys(result.errors).length);
-        setShowErrorSummary(true);
-      }
+      setShowErrorSummary(!result.success);
+      // NOTE: cannot use errors here to update as it will be updated in the next tick, better useEffect
     },
     [setShowErrorSummary, onSubmit]
   );
+
+  /* Syncing the error count in the title */
+  useEffect(() => {
+    const errorCount = Object.keys(errors || {}).length;
+    if (errorCount) {
+      updateDocumentTitleWithErrors(errorCount);
+    } else {
+      resetDocumentTitle();
+    }
+  }, [errors]);
 
   return (
     <section css={styles.formBox}>
