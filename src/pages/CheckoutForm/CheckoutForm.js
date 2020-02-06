@@ -14,7 +14,7 @@ export default function CheckoutForm() {
       ...values
     });
     updateStepNumber(stepNumber + 1);
-  }, [])
+  }, [stepNumber, formValues])
 
   return (
     <WizardPage title={"A Smooth Checkout"}>
