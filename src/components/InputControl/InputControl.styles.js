@@ -47,13 +47,18 @@ const showPassButton = css`
   }
 `;
 
+const wrapper = css`
+  margin-bottom: 2rem;
+`
+
 const styles = {
   labelBox,
   label,
   hint,
   error,
   input,
-  showPassButton
+  showPassButton,
+  wrapper
 };
 
 export default styles;

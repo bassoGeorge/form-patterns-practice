@@ -3,9 +3,10 @@ import {Shadows} from '../../components/GlobalStyles'
 
 export const PageWrapper = styled.div`
 	min-height: 100vh;
+	padding-top: 10rem;
 	width: 100vw;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	background: #116466; /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #116466, #2C3531); /* Chrome 10-25, Safari 5.1-6 */

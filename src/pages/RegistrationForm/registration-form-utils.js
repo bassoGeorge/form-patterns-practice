@@ -1,5 +1,4 @@
-const nonEmptyCheck = v => v && v.length > 0;
-const SPECIAL_CHAR_PAT = /[!@#$%^&*?]/;
+import {emailFormatCheck, genLengthCheckFn, nonEmptyCheck, passwordCheck} from "../../utils/standard-validations";
 
 export const REGISTRATION_FORM_CONFIG = [
   {
@@ -23,7 +22,7 @@ export const REGISTRATION_FORM_CONFIG = [
         message: "Enter your email address"
       },
       {
-        method: e => ~e.indexOf("@"),
+        method: emailFormatCheck,
         message: "This is an invalid email address"
       }
     ]
@@ -36,11 +35,11 @@ export const REGISTRATION_FORM_CONFIG = [
         message: "Enter a password"
       },
       {
-        method: p => p.length >= 8,
+        method: genLengthCheckFn(8),
         message: "The password should be 8 characters or more"
       },
       {
-        method: p => p.match(SPECIAL_CHAR_PAT),
+        method: passwordCheck,
         message: "The password should contain at least 1 special character"
       }
     ]

@@ -24,7 +24,7 @@ export default function InputControl({
   id = id || generateIdFromLabel(label);
 
   return (
-    <>
+    <div css={styles.wrapper}>
       <label htmlFor={id} css={styles.labelBox}>
         <span css={styles.label}>{label}</span>
         {hint && <p css={styles.hint}>{hint}</p>}
@@ -35,7 +35,7 @@ export default function InputControl({
       ) : (
         <NormalInput value={value} onChange={onChange} type={type} id={id} />
       )}
-    </>
+    </div>
   );
 }
 

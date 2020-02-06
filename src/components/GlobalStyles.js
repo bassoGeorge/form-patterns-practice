@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
 	}
 	body {
 		font-family: Helvetica, Arial, sans-serif;
+		margin: 0;
 	}
 	*, *::before, *::after {
 		box-sizing: inherit;

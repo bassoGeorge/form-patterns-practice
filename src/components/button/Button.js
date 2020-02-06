@@ -2,7 +2,7 @@ import React from "react";
 import { css } from "styled-components";
 import {Colors, HighlightColors} from '../GlobalStyles'
 
-const styles = css`
+export const ButtonStyles = css`
   border-radius: 8px;
   border: none;
   background: ${Colors.dark};
@@ -15,9 +15,9 @@ const styles = css`
   }
 `;
 
-export function Button({ title, onClick = () => {} }) {
+export function Button({ title, onClick = () => {}, type = 'button' }) {
   return (
-    <button css={styles} onClick={e => onClick("Hi there")}>
+    <button css={ButtonStyles} onClick={e => onClick()} type={type}>
       {title}
     </button>
   );
