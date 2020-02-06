@@ -4,10 +4,11 @@ import InputControl from "../../components/InputControl/InputControl";
 import useForm from '../../hooks/useForm'
 import {ButtonStyles} from '../../components/button/Button'
 
-export function CheckoutStep1({ onSubmit }) {
+export default function CheckoutStep1({ onSubmit, initialValues = {} }) {
   const [inputValues, onChangeHandlers, onFormSubmit, errors] = useForm([
     {
       field: "email",
+      startValue: initialValues.email || "",
       validations: [
         {
           method: nonEmptyCheck,
