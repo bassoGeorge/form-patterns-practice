@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, text } from "@storybook/addon-knobs";
 
 export default {
-  title: "My Button",
+  title: "Design System/Button",
   component: Button,
   decorators: [withKnobs]
 };

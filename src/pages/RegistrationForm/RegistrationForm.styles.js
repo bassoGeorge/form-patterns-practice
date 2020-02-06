@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import {Shadows} from '../../components/GlobalStyles'
 
 const formStyles = css`
   label {
@@ -31,7 +32,7 @@ const formBoxStyles = css`
   margin: 50px auto;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  ${Shadows.normal};
 `;
 
 export const styles = {

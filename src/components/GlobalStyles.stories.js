@@ -3,7 +3,7 @@ import GlobalStyles, { Colors } from "./GlobalStyles";
 import styled, { css } from "styled-components";
 
 export default {
-  title: "Color Scheme"
+  title: "Design System/Colors"
 };
 
 const commonTileStyle = css`
