@@ -4,6 +4,7 @@ import { generateIdFromLabel } from "../../utils/input-utils";
 import styles from "./InputControl.styles";
 import NormalInput from "./NormalInput";
 import PasswordInput from "./PasswordInput";
+import {css} from 'styled-components'
 
 export default function InputControl({
   type,
@@ -13,7 +14,8 @@ export default function InputControl({
   label,
   hint,
   error,
-  id
+  id,
+  additionalStyles = css``
 }) {
   //const idBox = useRef();
   //useEffect(() => {
@@ -24,7 +26,7 @@ export default function InputControl({
   id = id || generateIdFromLabel(label);
 
   return (
-    <div css={styles.wrapper}>
+    <div css={[styles.wrapper, additionalStyles]}>
       <label htmlFor={id} css={styles.labelBox}>
         <span css={styles.label}>{label}</span>
         {hint && <p css={styles.hint}>{hint}</p>}

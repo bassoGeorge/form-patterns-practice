@@ -135,3 +135,27 @@ export const PasswordField = () => {
 PasswordField.story = {
   name: "Password field behaviour"
 };
+
+export const CustomStyles = () => {
+  const additionalStyles = text(
+    "Additional Styles",
+    `
+    & input {
+      width: 100px;
+    }
+  `
+  );
+  return (
+    <Statefully
+      startValue="Default text"
+      render={(value, setValue) => (
+        <InputControl
+          value={value}
+          label={text("Label", "User Name")}
+          onChange={setValue}
+          additionalStyles={additionalStyles}
+        />
+      )}
+    />
+  );
+};
