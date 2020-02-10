@@ -7,7 +7,7 @@ export default function PasswordInput({ id, value, onChange, onBlur }) {
   const togglePass = useCallback(() => setShowPass(!showPass), [showPass]);
 
   return (
-    <div>
+    <div css={styles.passwordInputWrapper}>
       <input
         css={styles.input}
         id={id}

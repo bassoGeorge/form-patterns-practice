@@ -8,14 +8,15 @@ export default {
   decorators: [withKnobs]
 };
 
-function Statefully({ render }) {
-  const [value, setValue] = useState("");
+function Statefully({ render, startValue = "" }) {
+  const [value, setValue] = useState(startValue);
   return <>{render(value, setValue)}</>;
 }
 
 export const Basic = () => {
   return (
     <Statefully
+      startValue="Default text"
       render={(value, setValue) => (
         <InputControl
           value={value}

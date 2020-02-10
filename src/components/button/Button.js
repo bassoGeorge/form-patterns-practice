@@ -1,9 +1,9 @@
 import React from "react";
 import { css } from "styled-components";
-import {Colors, HighlightColors} from '../GlobalStyles'
+import {Colors, HighlightColors, RoundBorders} from '../GlobalStyles'
 
 export const ButtonStyles = css`
-  border-radius: 8px;
+  ${RoundBorders.small};
   border: none;
   background: ${Colors.dark};
   color: white;
