@@ -3,7 +3,7 @@ import { text, withKnobs, optionsKnob } from "@storybook/addon-knobs";
 import InputControl from "./InputControl";
 
 export default {
-  title: "Input Control",
+  title: "Forms/Input Control",
   component: InputControl,
   decorators: [withKnobs]
 };

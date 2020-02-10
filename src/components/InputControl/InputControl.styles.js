@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import {Colors, HighlightColors, RoundBorders} from '../GlobalStyles'
+import { Colors, HighlightColors, RoundBorders } from "../GlobalStyles";
 
 const labelBox = css`
   display: block;
@@ -46,8 +46,7 @@ const showPassButton = css`
   color: ${Colors.dark};
   padding: 6px;
   margin-left: 8px;
-  transition: background-color 200ms ease-in-out,
-              color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
 
   &[aria-pressed="true"] {
     color: white;
@@ -56,12 +55,12 @@ const showPassButton = css`
 `;
 
 const wrapper = css`
-  margin: 1rem 0.5rem 2rem;
-`
+  margin: 1rem 0 2rem;
+`;
 
 const passwordInputWrapper = css`
   display: flex;
-`
+`;
 
 const styles = {
   labelBox,
