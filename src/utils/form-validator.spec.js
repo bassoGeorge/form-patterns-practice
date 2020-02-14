@@ -1,5 +1,6 @@
 import FormValidator from "./form-validator";
 
+const emptyCheck = v => v && v.trim().length > 0;
 describe("FormValidator", () => {
   it("is created as a new object and has a ruleSet", () => {
     const validator = new FormValidator();
@@ -62,7 +63,7 @@ describe("FormValidator", () => {
 
     validator
       .forField("email")
-      .addRule(v => v && v.length > 0, "Email cannot be empty")
+      .addRule(emptyCheck, "Email cannot be empty")
       .addRule(
         v => ~v.indexOf("@"),
         "Email should be of valid format, missing @"
@@ -81,10 +82,8 @@ describe("FormValidator", () => {
       ]
     });
   });
-
   it("validates an entire form", () => {
     const validator = new FormValidator();
-    const emptyCheck = v => v && v.trim().length > 0;
 
     validator
       .addRule("name", emptyCheck, "Name cannot be empty")
@@ -111,6 +110,32 @@ describe("FormValidator", () => {
       errors: {
         name: ["Name cannot be empty"]
       }
+    });
+  });
+
+  it("fails validation of missing important fields as well", () => {
+    const validator = new FormValidator();
+    validator.addRule("name", emptyCheck, "Name cannot be empty");
+
+    const result = validator.validate({});
+
+    expect(result).toEqual({
+      success: false,
+      errors: {
+        name: ["Name cannot be empty"]
+      }
+    });
+  });
+
+  it("allows for explicit partial validations", () => {
+    const validator = new FormValidator();
+    validator.addRule("name", emptyCheck, "Name cannot be empty");
+
+    const result = validator.validate({}, true);
+
+    expect(result).toEqual({
+      success: true,
+      errors: {}
     });
   });
 });

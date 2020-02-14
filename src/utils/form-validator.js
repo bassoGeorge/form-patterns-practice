@@ -46,9 +46,10 @@ FormValidator.prototype.validateField = function(field, value) {
   };
 };
 
-FormValidator.prototype.validate = function(form) {
-  return Object.keys(form)
-    .map(k => ({ key: k, ...this.validateField(k, form[k]) }))
+FormValidator.prototype.validate = function(form, partial = false) {
+  const keys = partial ? Object.keys(form) : Object.keys(this.ruleSet);
+  return keys
+    .map(k => ({ key: k, ...this.validateField(k, form[k] || "") }))
     .reduce(
       (acc, current) => {
         if (!current.success) {
