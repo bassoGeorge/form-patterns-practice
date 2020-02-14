@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { generateIdFromLabel } from "../../utils/input-utils";
 import styles from "./InputControl.styles";
 import NormalInput from "./NormalInput";
 import PasswordInput from "./PasswordInput";
-import {css} from 'styled-components'
+import { css } from "styled-components";
+import ControlHeading from "../ControlHeading/ControlHeading";
 
 export default function InputControl({
   type,
@@ -28,9 +29,7 @@ export default function InputControl({
   return (
     <div css={[styles.wrapper, additionalStyles]}>
       <label htmlFor={id} css={styles.labelBox}>
-        <span css={styles.label}>{label}</span>
-        {hint && <p css={styles.hint}>{hint}</p>}
-        {error && <p css={styles.error}>{error}</p>}
+        <ControlHeading label={label} hint={hint} error={error} />
       </label>
       {type === "password" ? (
         <PasswordInput value={value} onChange={onChange} id={id} />

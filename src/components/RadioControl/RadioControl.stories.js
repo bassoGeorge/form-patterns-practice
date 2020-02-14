@@ -17,6 +17,8 @@ export const Basic = () => (
     render={(value, setValue) => (
       <RadioControl
         label={"Payment Methods"}
+        hint={"For your convenience"}
+        error={"Just checking you got this"}
         value={value}
         onChange={setValue}
         options={[

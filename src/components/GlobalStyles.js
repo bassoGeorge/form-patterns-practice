@@ -29,12 +29,13 @@ export const HighlightColors = {
   mid: "#DCB796",
   lightMid: "#FFCB9A",
   light: "#BED3CE"
-}
+};
 
 export const Shadows = {
-  normal: "box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"
-}
+  normal:
+    "box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);"
+};
 
 export const RoundBorders = {
-  small: "border-radius: 4px"
-}
+  small: "border-radius: 4px;"
+};

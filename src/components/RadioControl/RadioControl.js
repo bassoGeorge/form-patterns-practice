@@ -1,12 +1,24 @@
 import React, { useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { generateIdFromLabel } from "../../utils/input-utils";
+import ControlHeading from "../ControlHeading/ControlHeading";
+import styled from "styled-components";
+
+const FieldSet = styled.fieldset`
+  border: none;
+  margin-top: 1.5rem;
+  & legend {
+    margin-bottom: 0.5rem;
+  }
+`;
 
 export default function RadioControl({
   label,
   options,
   value: selectedValue,
-  onChange
+  onChange,
+  error,
+  hint
 }) {
   const handleChange = useCallback(
     e => {
@@ -16,8 +28,12 @@ export default function RadioControl({
   );
 
   return (
-    <fieldset>
-      {label && <legend>{label}</legend>}
+    <FieldSet>
+      {
+        <legend>
+          <ControlHeading label={label} hint={hint} error={error} />
+        </legend>
+      }
       {options.map(({ label, value }) => (
         <RadioItem
           value={value}
@@ -26,7 +42,7 @@ export default function RadioControl({
           onChange={handleChange}
         />
       ))}
-    </fieldset>
+    </FieldSet>
   );
 }
 
@@ -39,7 +55,9 @@ RadioControl.propTypes = {
   ).isRequired,
   label: PropTypes.string,
   value: PropTypes.any.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  hint: PropTypes.string,
+  error: PropTypes.string
 };
 
 function RadioItem({ value, label, isChecked, onChange }) {

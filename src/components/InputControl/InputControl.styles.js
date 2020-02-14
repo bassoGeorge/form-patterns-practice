@@ -6,26 +6,6 @@ const labelBox = css`
   margin-bottom: 0.3rem;
 `;
 
-const label = css`
-  font-weight: bold;
-`;
-
-const subLabel = css`
-  font-weight: normal;
-  margin-top: 0.3rem;
-  margin-bottom: 0;
-  font-size: 0.8em;
-`;
-
-const hint = css`
-  ${subLabel}
-`;
-
-const error = css`
-  color: red;
-  ${subLabel}
-`;
-
 const input = css`
   font-size: 1rem;
   padding: 0.3em 0.5em;
@@ -36,12 +16,12 @@ const input = css`
   }
   box-shadow: none;
   border: 1px solid ${Colors.lightMid};
-  ${RoundBorders.small};
+  ${RoundBorders.small}
 `;
 
 const showPassButton = css`
   border: 1px solid ${Colors.dark};
-  ${RoundBorders.small};
+  ${RoundBorders.small}
   background: white;
   color: ${Colors.dark};
   padding: 6px;
@@ -64,9 +44,6 @@ const passwordInputWrapper = css`
 
 const styles = {
   labelBox,
-  label,
-  hint,
-  error,
   input,
   showPassButton,
   wrapper,
